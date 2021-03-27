@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
-    posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail',read_only=True)
+    posts = serializers.HyperlinkedRelatedField(many=True, view_name='post-detail', read_only=True)
     owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
@@ -14,6 +14,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class PostSerializer(serializers.HyperlinkedModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
+
     class Meta:
         model = Post
         fields = ['url', 'owner', 'id', 'title', 'content', 'author']
